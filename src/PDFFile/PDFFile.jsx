@@ -1,16 +1,7 @@
 import { Page, Text, Image, Document, StyleSheet, View } from '@react-pdf/renderer'
 import React from 'react'
 import Images from '../Images/Images'
-import img1 from '../Images/img1.png'
-import img2 from '../Images/img2.png'
-import img3 from '../Images/img3.png'
-import img4 from '../Images/img4.png'
-import QRCode from '../Images/download.png'
-import Screenshot1 from '../Images/Screenshot1.png'
-import Screenshot2 from '../Images/Screenshot2.png'
-import Screenshot3 from '../Images/Screenshot3.png'
-import Screenshot4 from '../Images/Screenshot4.png'
-import Screenshot5 from '../Images/Screenshot5.png'
+
 
 
 const styles = StyleSheet.create({
@@ -151,7 +142,7 @@ const PDFFile = () => {
     <Page>
       <View style={styles.whole}>
       <View style={styles.header}>
-    <Image style={styles.image1} src={insurance} />
+    <Image style={styles.image1} src={Images.logo} />
     <View style={styles.text1}>
       <Text>Ministry of Planning and Finance</Text>
       <Text>Myanma Insurance</Text>
@@ -196,40 +187,40 @@ const PDFFile = () => {
               <View style={styles.tableCell}><Text>31445 Antuillq</Text></View>
             </View>
           </View>
-          <Image style={styles.img4} src={img4}/>
-          <Image style={styles.imgf3} src={img3}/>
-          <Image style={styles.QRCode} src={QRCode}/>
+          <Image style={styles.img4} src={Images.img4}/>
+          <Image style={styles.imgf3} src={Images.img3}/>
+          <Image style={styles.QRCode} src={Images.QRCode}/>
           <Text style={styles.print}>Print Date:   30-11-2023</Text>
       {/* <Text render={({pageNumber, totalPages}) => `${pageNumber} / ${totalPages}`} fixed/> */}
 
       </View>
-      <Image src={Screenshot1}/>
-      <Image style={styles.img1} src={img1}/>
+      <Image src={Images.Screenshot1}/>
+      <Image style={styles.img1} src={Images.img1}/>
       <Text style={styles.print}>Print Date:   30-11-2023</Text>
     </Page>
     <Page>
       <View style={styles.page3}>
-      <Image style={styles.img2} src={img2}/>
+      <Image style={styles.img2} src={Images.img2}/>
       <Image style={styles.image2} src={Images.logo} />
       </View>
       <Text style={styles.print}>Print Date:   30-11-2023</Text>
     </Page>
     <Page>
-      <Image style={styles.s2} src={Screenshot2}/>
+      <Image style={styles.s2} src={Images.Screenshot2}/>
       <Text style={styles.print}>Print Date:   30-11-2023</Text>
     </Page>
     <Page>
-    <Image style={styles.s2} src={Screenshot3}/>
+    <Image style={styles.s2} src={Images.Screenshot3}/>
     <Text style={styles.print}>Print Date:   30-11-2023</Text>
     </Page>
     <Page>
-    <Image style={styles.s2} src={Screenshot4}/>
+    <Image style={styles.s2} src={Images.Screenshot4}/>
     <Text style={styles.print}>Print Date:   30-11-2023</Text>
     </Page>
     <Page>
-    <Image style={styles.s2} src={Screenshot5}/>
-      <Image style={styles.img4} src={img4}/>
-      <Image style={styles.img3} src={img3}/>
+    <Image style={styles.s2} src={Images.Screenshot5}/>
+      <Image style={styles.img4} src={Images.img4}/>
+      <Image style={styles.img3} src={Images.img3}/>
       <Text style={styles.print}>Print Date:   30-11-2023</Text>
       </Page>
    </Document>
