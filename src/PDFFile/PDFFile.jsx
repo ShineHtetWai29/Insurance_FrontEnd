@@ -148,7 +148,7 @@ const PDFFile = () => {
       <Text>Myanma Insurance</Text>
       </View>
       <View style={styles.text2}>
-        <Text>phone No: 1234567</Text>
+        <Text>phone No: </Text>
         <Text>Email: insure@gmail.com</Text>
       </View>
       </View>

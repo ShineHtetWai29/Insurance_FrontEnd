@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../App";
 import { da } from "date-fns/locale";
 import PDFFile from "../../PDFFile/PDFFile";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 function EnquiryForm() {
   const [countryInfo, setCountryInfo] = useState([]);
@@ -165,8 +166,9 @@ function EnquiryForm() {
                       <td className="px-6 py-4">30 Apr 2024</td>
                       <td className="px-6 py-4">
                         <PDFDownloadLink
-                          document={<PDFFile />}
+                          document={<PDFFile  />}
                           fileName="Certificate"
+                          fileDat
                         >
                           {({ loading }) =>
                             loading ? (
