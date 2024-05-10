@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-datepickermonth-dropdown,
+.react-datepickeryear-dropdown {
+  background-color: gray !important;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+  }
+
