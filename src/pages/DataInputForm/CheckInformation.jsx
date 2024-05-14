@@ -80,65 +80,65 @@ console.log(inboundInfo);
   return (
     <>
       <div className="bg-[#f0f4f9] py-6 mt-[-30px]">
-        <div className="bg-white w-[1170px] shadow-xl my-6  mx-auto px-6 py-2 rounded-lg shadow-gray-400">
-          <form className="text-left p-10">
+        <div className="bg-white max-w-[1170px] shadow-xl my-6  mx-auto px-6 py-2 rounded-lg shadow-gray-400">
+          <form className="text-left moblie:px-10 py-10">
             <h1 className="font-semibold text-xl text-blue-800">
               PLEASE CHECK PAYMENT AND INSURED PERSON INFORMATION
             </h1>
             <h3 className="pt-7 pb-3 font-medium underline underline-offset-1 text-blue-800">
               PAYMENT INFORMATION
             </h3>
-            <div className="grid grid-cols-2 bg-yellow-400 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Payment Channel</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
+              <p className="font-medium  w-40%">Payment Channel</p>
               <p className="uppercase">{inboundInfo.paymentMethod}</p>
             </div>
-            <div className="grid grid-cols-2 bg-yellow-400 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Premium Amount</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
+              <p className="font-medium  w-40%">Premium Amount</p>
               <p>{inboundInfo.premiumRate}.00 USD</p>
             </div>
-            <div className="grid grid-cols-2 bg-yellow-400 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Service Charge ( Visa )</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
+              <p className="font-medium  w-40%">Service Charge ( Visa )</p>
               <p>{(inboundInfo.premiumRate * 0.0364).toFixed(2)} USD</p>
             </div>
-            <div className="grid grid-cols-2 bg-yellow-400 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
+              <p className="font-medium  w-40%">
                 Total Amount (Including Service Charges)
               </p>
               <p>
                 {inboundInfo.premiumRate + inboundInfo.premiumRate * 0.0364} USD
               </p>
             </div>
-            <div className="grid grid-cols-2 bg-yellow-400 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
+              <p className="font-medium  w-40%">
                 Net Amount (Including Service Charges)
               </p>
               <p>
                 {inboundInfo.premiumRate + inboundInfo.premiumRate * 0.0364} USD
-              </p>{" "}
+              </p>
             </div>
             <h3 className="pt-7 pb-3 font-medium underline underline-offset-1 text-blue-800">
               INSURED PERSON'S PASSPORT INFORMATION
             </h3>
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Passport Number</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Passport Number</p>
               <p>{inboundInfo ? inboundInfo.passportNo : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Passport Issued Date</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Passport Issued Date</p>
               <p>{inboundInfo.passportIssuedDate}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Passport Issued Country</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Passport Issued Country</p>
               <p>{inboundInfo ? inboundInfo.passportIssuedCountry : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
             <h3 className="pt-7 pb-3 font-medium underline underline-offset-1 text-blue-800">
               INSURED PERSON INFORMATION
             </h3>
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Insured For</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Insured For</p>
               <p>
                 {inboundInfo.isChild
                   ? "Insured For Child"
@@ -146,117 +146,117 @@ console.log(inboundInfo);
               </p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Name (as per passport)</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Name (as per passport)</p>
               <p>{inboundInfo ? inboundInfo.iPName : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">
                 Date of Birth (as per passport)
               </p>
               <p>{inboundInfo.iPDob}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Gender (as per passport)</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Gender (as per passport)</p>
               <p>{inboundInfo.iPGender}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Estimated Arrival Date</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Estimated Arrival Date</p>
               <p>{inboundInfo.arrivalDate}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Journey From</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Journey From</p>
               <p>{inboundInfo ? inboundInfo.journeyFrom : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Journey To</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Journey To</p>
               <p>Myanmar</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Coverage Plan</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Coverage Plan</p>
               <p>{inboundInfo.coveragePlan} DAYS</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Contact Phone Number</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Contact Phone Number</p>
               <p>{inboundInfo ? inboundInfo.iPPhone : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Email Adress</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Email Adress</p>
               <p>{inboundInfo ? inboundInfo.iPEmail : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Resident Address</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Resident Address</p>
               <p>{inboundInfo ? inboundInfo.iPresidentAddress : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Resident Country</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Resident Country</p>
               <p>{iPCountry}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Address in Myanmar</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Address in Myanmar</p>
               <p>{inboundInfo ? inboundInfo.iPAddress : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
             <h3 className="pt-7 pb-3 font-medium underline underline-offset-1 text-blue-800">
               BENEFIACIARY INFORMATION
             </h3>
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Name</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Name</p>
               <p>{inboundInfo ? inboundInfo.bPName : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Date of Birth</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Date of Birth</p>
               <p>{inboundInfo.bPDob}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">
                 National Identification Number
               </p>
               <p>{inboundInfo ? inboundInfo.NRC : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Relationship</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Relationship</p>
               <p>{inboundInfo ? inboundInfo.relationship : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Contact Number</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Contact Number</p>
               <p>{inboundInfo ? inboundInfo.bPPhone : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Email</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Email</p>
               <p>{inboundInfo ? inboundInfo.bPEmail : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Resident Address</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Resident Address</p>
               <p>{inboundInfo ? inboundInfo.bPresidentAddress : ""}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
-            <div className="grid grid-cols-2 h-10 items-center mb-0.5">
-              <p className="font-medium pl-3 w-40%">Resident Country</p>
+            <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+              <p className="font-medium  w-40%">Resident Country</p>
               <p>{bPCountry}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
             <div className="mt-5">
               <button
                 type="submit"
-                className=" bg-blue-800 h-8 w-32 text-white rounded-sm"
+                className=" bg-blue-800 hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 h-8 w-32 text-white rounded-sm"
                 onClick={submitHandler}
               >
                 COMFIRM

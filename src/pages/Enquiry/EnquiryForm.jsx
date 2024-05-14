@@ -4,8 +4,10 @@ import { Context } from "../../App";
 import { da } from "date-fns/locale";
 import PDFFile from "../../PDFFile/PDFFile";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { v4 as uuidv4 } from "uuid";
 
 function EnquiryForm() {
+  const randomId = uuidv4();
   const [countryInfo, setCountryInfo] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [showTable, setShowTable] = useState(false);
@@ -19,10 +21,12 @@ function EnquiryForm() {
     const countryUrl = "http://localhost:8080/country";
     axios
       .get(countryUrl)
+
       .then((response) => {
-        console.log(response.data);
+        response.data.data.sort((a, b) =>
+          a.country_name.localeCompare(b.country_name)
+        );
         setCountryInfo(response.data.data);
-        console.log(countryInfo);
       })
       .catch((error) => {
         console.log(error);
@@ -56,10 +60,10 @@ function EnquiryForm() {
 
   return (
     <div className="bg-[#f0f4f9] py-6 mt-[-30px]">
-      <div className="bg-white w-[1170px] mx-auto p-8 rounded-lg shadow-gray-400">
-        <div className="grid grid-cols-2 gap-[32px]">
+      <div className="bg-white max-w-[1170px] mx-auto p-8 rounded-lg mt-6 shadow-gray-400">
+        <div className="grid mobile:grid-cols-2 gap-[32px]">
           <div className="">
-            <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+            <label className="block font-bold text-blue-800 tablet:text-[16px] text-[14px] mb-[8px]">
               Passport Number
               <span className="text-red-600 ml-2">*</span>
             </label>
@@ -75,7 +79,7 @@ function EnquiryForm() {
             />
           </div>
           <div className="">
-            <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+            <label className="block font-bold text-blue-800 lg:text-[16px] tablet:text-[14px] mb-[8px]">
               Passport Issued Country
               <span className="text-red-600 ml-2">*</span>
             </label>
@@ -105,7 +109,7 @@ function EnquiryForm() {
           </div>
           <button
             onClick={searchHandler}
-            className="w-1/4 text-white bg-blue-800 text-center rounded py-2"
+            className="w-1/4 text-white hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 bg-blue-800 text-center rounded py-2"
           >
             Search
           </button>
@@ -151,12 +155,18 @@ function EnquiryForm() {
                     <th scope="col" className="px-6 py-3"></th>
                   </tr>
                 </thead>
-                {tableData.map((data) => (
+                {tableData.map((data, index) => (
                   <tbody key={data.in_proposal_id}>
                     <tr className="bg-white border-b ">
-                      <td className="px-6 py-4">1</td>
-                      <td className="px-6 py-4">1234567</td>
-                      <td className="px-6 py-4">{data.insuredPerson.i_name}</td>
+                      <td className="px-6 py-4">{index + 1}</td>
+                      <td className="px-6 py-4">{randomId}</td>
+                      {data.insuredPerson.isChild ? (
+                        <td className="px-6 py-4">{data.ch_name}</td>
+                      ) : (
+                        <td className="px-6 py-4">
+                          {data.insuredPerson.i_name}
+                        </td>
+                      )}
                       <td className="px-6 py-4">{data.age}</td>
                       <td className="px-6 py-4">
                         {data.insuredPerson.i_phone}
@@ -166,7 +176,7 @@ function EnquiryForm() {
                       <td className="px-6 py-4">30 Apr 2024</td>
                       <td className="px-6 py-4">
                         <PDFDownloadLink
-                          document={<PDFFile  />}
+                          document={<PDFFile data={data} />}
                           fileName="Certificate"
                           fileDat
                         >
@@ -174,7 +184,9 @@ function EnquiryForm() {
                             loading ? (
                               <button>loadingDocumet...</button>
                             ) : (
-                              <button className="bg-blue-600 p-2 text-center">Download</button>
+                              <button className="bg-blue-600 text-white hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 p-2 text-center rounded">
+                                Download
+                              </button>
                             )
                           }
                         </PDFDownloadLink>

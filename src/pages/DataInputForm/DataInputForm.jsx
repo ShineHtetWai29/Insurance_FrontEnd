@@ -34,8 +34,8 @@ const DataInputForm = () => {
   const [isBPDob, setIsBPDob] = useState(false);
   const [isRelationship, setIsRelationship] = useState(false);
   const [isBPPhone, setIsBPPhone] = useState(false);
-  const [isBResidentAddress, setIsBResidentAddress] = useState(false);
-  const [isBResidentCountry, setIsBResidentCountry] = useState(false);
+  const [isBResidentAddress, setIsbResidentAddress] = useState(false);
+  const [isBResidentCountry, setIsbResidentCountry] = useState(false);
   const [isChildName, setIsChildName] = useState(false);
   const [isChildDob, setIsChilDob] = useState(false);
   const [isChildGender, setIsChilsGender] = useState(false);
@@ -67,10 +67,11 @@ const DataInputForm = () => {
     const countryUrl = "http://localhost:8080/country";
     axios
       .get(countryUrl)
+      
       .then((response) => {
-        console.log(response.data);
+        
+        response.data.data.sort((a, b) => a.country_name.localeCompare(b.country_name));
         setCountryInfo(response.data.data);
-        console.log(countryInfo);
       })
       .catch((error) => {
         console.log(error);
@@ -96,8 +97,8 @@ const DataInputForm = () => {
     setIsBPDob(inboundInfo.bPDob === "");
     setIsRelationship(inboundInfo.relationship === "");
     setIsBPPhone(inboundInfo.bPPhone === "");
-    setIsBResidentAddress(inboundInfo.bPesidentAddress === "");
-    setIsBResidentCountry(inboundInfo.bPesidentCountry === "");
+    setIsbResidentAddress(inboundInfo.bPesidentAddress === "");
+    setIsbResidentCountry(inboundInfo.bPesidentCountry === "");
     setIsChildName(inboundInfo.childName === "");
     setIsChilDob(inboundInfo.childDob === "");
     setIsChilsGender(inboundInfo.childGender === "");
@@ -154,19 +155,19 @@ const DataInputForm = () => {
   return (
     <>
       <div className="bg-[#f0f4f9] py-6 mt-[-30px]">
-        <h2 className="text-blue-800 text-[24px] font-semibold text-center my-6 ">
+        <h2 className="text-blue-800 text-[24px] sm:text-[18px] font-semibold text-center my-6 ">
           INBOUND TRAVEL ACCIDENT INSURANCE
         </h2>
-        <div className="bg-white w-[1170px] shadow-xl  mx-auto px-12 py-4 rounded-lg shadow-gray-400">
+        <div className="bg-white max-w-[1170px]  shadow-xl  mx-auto mobile:px-12 px-2 py-4 rounded-lg shadow-gray-400">
           <form className="" >
             {/* PASSPORT INFORMATION */}
             <div className="py-[20px] border-b-[1px] border-gray-500 ">
-              <h2 className="underline text-[18px] font-bold text-blue-800">
+              <h2 className="underline text-[18px]  font-bold text-blue-800">
                 PASSPORT INFORMATION
               </h2>
-              <div className="flex gap-[32px] mt-4">
-                <div className="w-1/3  ">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+              <div className="lg:flex gap-[32px] mt-4">
+                <div className="w-1/3 md:w-full ">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Passport Number<span className="text-red-600 ml-2">*</span>
                   </label>
                   <input
@@ -185,8 +186,8 @@ const DataInputForm = () => {
                     <p className="text-red-600">Passport Number is required</p>
                   )}
                 </div>
-                <div className="w-1/3">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                <div className="w-1/3 md:w-full">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Passport Issued Date
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -208,8 +209,8 @@ const DataInputForm = () => {
                     </p>
                   )}
                 </div>
-                <div className="w-1/3 ">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                <div className="w-1/3 md:w-full ">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Passport Issued Country
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -248,7 +249,7 @@ const DataInputForm = () => {
               <h2 className="underline text-[18px] font-bold text-blue-800">
                 INSURED INFORMATION
               </h2>
-              <div className="grid grid-cols-2 gap-[32px] mt-5 ">
+              <div className="grid mobile:grid-cols-2 tablet:text-[12px] gap-[32px] mt-5 ">
                 <div className="flex">
                   <input
                     id="insured-radio-1"
@@ -265,7 +266,7 @@ const DataInputForm = () => {
                   />
                   <label
                     htmlFor="insured-radio-1"
-                    className="ml-3 font-bold text-blue-800 text-[16px] "
+                    className="ml-3 font-bold text-blue-800 mobile:text-[16px]"
                   >
                     BUY FOR YOURSELF(THIS PASSPORT HOLDER)
                   </label>
@@ -286,7 +287,7 @@ const DataInputForm = () => {
                   />
                   <label
                     htmlFor="insured-radio-2"
-                    className="ml-3 font-bold text-blue-800 text-[16px] "
+                    className="ml-3 font-bold text-blue-800 mobile:text-[16px]"
                   >
                     BUY FOR THE CHILD TRAVEL TOGETHER WITH THIS PASSPORT HOLDER
                     <br />
@@ -294,9 +295,9 @@ const DataInputForm = () => {
                   </label>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-y-3  gap-x-[32px] mt-4">
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-y-3  gap-x-[32px] mt-4">
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Name (as per passport)
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -312,7 +313,7 @@ const DataInputForm = () => {
                   {isIPName && <p className="text-red-600">Name is required</p>}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Date of Birth(as per passport)
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -332,7 +333,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Gender (as per passport)
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -362,7 +363,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Estimated Arrival Date
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -383,7 +384,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Journey From
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -413,7 +414,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Journey To
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -426,7 +427,7 @@ const DataInputForm = () => {
                   ></input>
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Coverage Plan
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -487,18 +488,17 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Contact Phone Number
                     <span className="text-red-600 ml-2">*</span>
                   </label>
                   <div className="flex w-full test-[15px] border-[1px] border-gray-400 rounded ">
                     <select
                       type="text"
-                      value={inboundInfo.iPCode}
                       className="w-[100px] text-gray p-2 bg-none "
                       onChange={(e) => 
                         setInboundInfo({
-                          ...inboundInfo, bPCode:e.target.value
+                          ...inboundInfo, iPCode:e.target.value
                         })
                       }
                     >
@@ -514,9 +514,10 @@ const DataInputForm = () => {
                     </select>
                     <input
                       type="number"
-                      className="w-full "
+                      
+                      className="w-full px-2 "
                       placeholder="ENTER PHONE NUMBER"
-                      onChange={(e) => setInboundInfo({...inboundInfo, iPPhone: `${inboundInfo.iPCode}${e.target.value}`})}
+                      onChange={(e) => setInboundInfo({...inboundInfo, iPPhone: `${inboundInfo.iPCode} ${e.target.value}`})}
                     />
                   </div>
                   {isIPPhone && (
@@ -524,7 +525,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Insured's Email
                   </label>
                   <input
@@ -541,7 +542,7 @@ const DataInputForm = () => {
                   />
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Address in Myanmar (Max: 250 Char)
                   </label>
                   <textarea
@@ -558,7 +559,7 @@ const DataInputForm = () => {
                   />
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Resident Address (Max: 250 Char)
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -579,7 +580,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Resident Country
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -617,9 +618,9 @@ const DataInputForm = () => {
                 <h2 className="underline text-[18px] font-bold text-blue-800">
                   CHILD INFORMATION(CHILD IS NOT HOLDING A VALID PASSPORT)
                 </h2>
-                <div className="grid grid-cols-3 gap-y-3 gap-x-[32px] mt-8 ">
+                <div className="grid grid-cols-3 md:grid-cols-1 gap-y-3 gap-x-[32px] mt-8 ">
                   <div className="">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Child Name
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -640,7 +641,7 @@ const DataInputForm = () => {
                     )}
                   </div>
                   <div className="">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Date of Birth
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -660,7 +661,7 @@ const DataInputForm = () => {
                     )}
                   </div>
                   <div className="">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Gender
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -690,7 +691,7 @@ const DataInputForm = () => {
                     )}
                   </div>
                   <div className="">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Guardiance Name
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -713,7 +714,7 @@ const DataInputForm = () => {
                     )}
                   </div>
                   <div className="">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Relationship
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -742,9 +743,9 @@ const DataInputForm = () => {
               <h2 className="underline text-[18px] font-bold text-blue-800">
                 BENEFICIARY INFORMATION(In English)
               </h2>
-              <div className="grid grid-cols-3 gap-y-3   gap-x-[32px] mt-4">
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-y-3   gap-x-[32px] mt-4">
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Name
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -762,7 +763,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Date of Birth
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -783,7 +784,7 @@ const DataInputForm = () => {
                 </div>
 
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     National Identification Number
                   </label>
                   <input
@@ -797,7 +798,7 @@ const DataInputForm = () => {
                   />
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Relationship
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -816,7 +817,7 @@ const DataInputForm = () => {
                 </div>
 
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Contact Phone Number
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -840,7 +841,7 @@ const DataInputForm = () => {
                     </select>
                     <input
                       type="number"
-                      className="w-full "
+                      className="w-full p-2 "
                       placeholder="ENTER PHONE NUMBER"
                       onChange={(e) => setInboundInfo({
                         ...inboundInfo, bPPhone: `${inboundInfo.bPCode} ${e.target.value}`
@@ -854,7 +855,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Email
                   </label>
                   <input
@@ -869,7 +870,7 @@ const DataInputForm = () => {
                 </div>
 
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Resident Address (Max: 250 Char)
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -892,7 +893,7 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                     Resident Country
                     <span className="text-red-600 ml-2">*</span>
                   </label>
@@ -933,7 +934,7 @@ const DataInputForm = () => {
                 This section is only used for servicing agent of Myanmar
                 Insurance
               </h5>
-              <div className="flex gap-4">
+              <div className="mobile:flex gap-4">
                 <div className="flex  gap-2 items-center py-6">
                   <input
                     id="bordered-radio-1"
@@ -947,7 +948,7 @@ const DataInputForm = () => {
 
                   <label
                     htmlFor="bordered-radio-1"
-                    className="flex bg-white items-center gap-2 text-[16px] py-2 px-4"
+                    className="flex bg-white items-center gap-2 mobile:text-[16px]md:text-[10px] py-2 px-4"
                   >
                     <AiOutlineSetting className="text-blue-800 size-[30px]" />
 
@@ -956,7 +957,7 @@ const DataInputForm = () => {
                     </span>
                   </label>
                 </div>
-                <div className="flex gap-2 items-center py-6">
+                <div className="flex gap-2  items-center py-6">
                   <input
                     id="bordered-radio-2"
                     type="radio"
@@ -969,7 +970,7 @@ const DataInputForm = () => {
                   />
                   <label
                     htmlFor="bordered-radio-2"
-                    className="flex bg-white items-center gap-2 text-[16px] py-2 px-4"
+                    className="flex bg-white items-center gap-2 mobile:text-[16px]md:text-[10px] py-2 px-4"
                   >
                     <AiOutlineSetting className="text-blue-800 size-[30px]" />
 
@@ -980,9 +981,9 @@ const DataInputForm = () => {
                 </div>
               </div>
               {showAgent === "showagent" && (
-                <div className="grid grid-cols-6 gap-[32px]">
+                <div className="grid lg:grid-cols-6 grid-cols-2 md:grid-cols-2 gap-[32px]">
                   <div className="col-span-2">
-                    <label className=" block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className=" block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       Agent License Number
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -1000,7 +1001,7 @@ const DataInputForm = () => {
                     />
                   </div>
                   <div className="col-span-2">
-                    <label className="block font-bold text-blue-800 text-[16px] mb-[8px]">
+                    <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
                       NAME
                       <span className="text-red-600 ml-2">*</span>
                     </label>
@@ -1030,7 +1031,7 @@ const DataInputForm = () => {
 
             <button
               type="submit"
-              className="text-[15px] text-white text-center px-[24px] py-[8px] bg-blue-800 rounded bold"
+              className="text-[15px] hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 text-white text-center px-[24px] py-[8px] bg-blue-800 rounded bold"
               onClick={submitHandler}
             >
               SUBMIT AND CONTINUE

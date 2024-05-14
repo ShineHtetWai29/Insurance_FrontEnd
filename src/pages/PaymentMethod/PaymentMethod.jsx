@@ -11,9 +11,9 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
   return (
     <div
       id="container"
-      className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center"
+      className="fixed  inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center"
     >
-      <form className="w-[800px] bg-white rounded p-4">
+      <form className="max-w-[800px] bg-white rounded p-4">
         <div className="flex justify-between " onClick={()=> { 
           onClose(false)
           } }>
@@ -71,7 +71,7 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
           Choose Payment Method
         </h4>
 
-        <div className="w-full grid grid-cols-4 p-8 gap-4 border-[1px] border-gray-400 my-4">
+        <div className="w-full grid mobile:grid-cols-4 p-8 gap-4 border-[1px] border-gray-400 my-4">
           <div>
             <input
               type="radio"
@@ -86,7 +86,7 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
             <label htmlFor="visa" className="relative">
               <img
                 src={Images.visacard}
-                className={`col-span-1 h-[110px] ${
+                className={`mobile:col-span-1 w-full h-[110px] ${
                   inboundData.paymentMethod === "visa" ? "bg-gray-400" : ""
                 } p-4 border-[1px] border-gray-400`}
                 alt="Visa Card"
@@ -110,7 +110,7 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
             <label htmlFor="master" className="relative">
               <img
                 src={Images.mastercard}
-                className={`col-span-1 w-full p-4 h-[110px] ${
+                className={`mobile:col-span-1 w-full p-4 max-h-[110px] ${
                   inboundData.paymentMethod === "master" ? "bg-gray-400" : ""
                 } border-[1px] border-gray-400`}
                 alt="Mastercard"
@@ -121,7 +121,7 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
             </label>
           </div>
         </div>
-        <Link to={"/checkinformation"}  className="text-white text-[20px] font-bold bg-blue-800 text-center py-1 px-6 rounded "
+        <Link to={"/checkinformation"}  className="text-white hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 text-[20px] font-bold bg-blue-800 text-center py-1 px-6 rounded "
         >
           NEXT
         </Link>

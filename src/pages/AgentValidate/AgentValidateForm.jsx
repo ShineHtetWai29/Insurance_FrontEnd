@@ -40,7 +40,7 @@ function AgentValidateForm({ visible, onClose, validateResponse, setValidateResp
         onClose(false);
         console.log(validateResponse);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Agent is not found"));
   };
 
   if (!visible) return null;
