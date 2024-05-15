@@ -18,8 +18,9 @@ const DataInputForm = () => {
 
   // const [inboundInfo, setInboundInfo] = useState({ iPEmail: '', childDob: null });
   const [emailError, setEmailError] = useState();
+  const [emailbPError, setbPEmailError] = useState();
 
-  const handleEmailChange = (e) => {
+  const handleInsuredEmailChange = (e) => {
     const email = e.target.value;
     setInboundInfo({
       ...inboundInfo,
@@ -32,6 +33,21 @@ const DataInputForm = () => {
       setEmailError(true);
     } else {
       setEmailError(false);
+    }
+  };
+  const handleBeneficiaryEmailChange = (e) => {
+    const email = e.target.value;
+    setInboundInfo({
+      ...inboundInfo,
+      bPEmail: email,
+    });
+
+    // Simple email regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setbPEmailError(true);
+    } else {
+      setbPEmailError(false);
     }
   };
 
@@ -587,7 +603,7 @@ const DataInputForm = () => {
                     className={`w-full p-2 text-gray border-[1px]  focus:ring-blue-500 focus:border-blue-500  rounded ${
                       emailError ? "border-red-500" : "border-gray-400"
                     }`}
-                    onChange={handleEmailChange}
+                    onChange={handleInsuredEmailChange}
                     placeholder="Insured's Email Address"
                   />
                   {emailError && (
@@ -917,21 +933,21 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px] ">
                     Email
                   </label>
                   <input
                     type="email"
                     value={inboundInfo.bPEmail}
-                    className="w-full p-2 text-gray border-[1px] border-gray-400  focus:ring-blue-500 focus:border-blue-500  rounded"
-                    placeholder="ENTER EMAIL"
-                    onChange={(e) =>
-                      setInboundInfo({
-                        ...inboundInfo,
-                        bPEmail: e.target.value,
-                      })
-                    }
+                    className={`w-full p-2 text-gray border-[1px]  focus:ring-blue-500 focus:border-blue-500  rounded ${
+                      emailError ? "border-red-500" : "border-gray-400"
+                    }`}
+                    onChange={handleBeneficiaryEmailChange}
+                    placeholder="Beneficiary's Email Address"
                   />
+                  {emailbPError && (
+                    <p className="text-red-500 text-sm mt-2">Enter a valid Email Address</p>
+                  )}
                 </div>
 
                 <div className="">
