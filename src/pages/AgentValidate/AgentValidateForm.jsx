@@ -3,9 +3,16 @@ import React, { useState } from "react";
 import { GiCancel } from "react-icons/gi";
 import DataInputForm from "../DataInputForm/DataInputForm";
 
-function AgentValidateForm({ visible, onClose, validateResponse, setValidateResponse, setInboundInfo, inboundInfo }) {
+function AgentValidateForm({
+  visible,
+  onClose,
+  validateResponse,
+  setValidateResponse,
+  setInboundInfo,
+  inboundInfo,
+}) {
   const [agentValidate, setAgentValidate] = useState({
-    agentId:"",
+    agentId: "",
     agentLicense: "",
     agentPassword: "",
   });
@@ -19,9 +26,11 @@ function AgentValidateForm({ visible, onClose, validateResponse, setValidateResp
     setIsEmptyLicense(agentValidate.agentLicense === "");
     setIsEmptyPassword(agentValidate.agentPassword === "");
 
-    
-    if (agentValidate.agentLicense === "" || agentValidate.agentPassword === "") {
-      return; 
+    if (
+      agentValidate.agentLicense === "" ||
+      agentValidate.agentPassword === ""
+    ) {
+      return;
     }
 
     axios
@@ -73,12 +82,20 @@ function AgentValidateForm({ visible, onClose, validateResponse, setValidateResp
               placeholder="Enter Agent License No."
               value={agentValidate.agentLicense}
               onChange={(e) => {
-                setAgentValidate({ ...agentValidate, agentLicense: e.target.value });
-                setInboundInfo({ ...inboundInfo, agentLicense: e.target.value });
-                setIsEmptyLicense(false); 
+                setAgentValidate({
+                  ...agentValidate,
+                  agentLicense: e.target.value,
+                });
+                setInboundInfo({
+                  ...inboundInfo,
+                  agentLicense: e.target.value,
+                });
+                setIsEmptyLicense(false);
               }}
             />
-            {isEmptyLicense && <p className="text-red-600">License number is required</p>}
+            {isEmptyLicense && (
+              <p className="text-red-600">License number is required</p>
+            )}
           </div>
           <div className="">
             <label className="block font-bold text-blue-800 text-[15px] my-[10px]">
@@ -92,11 +109,16 @@ function AgentValidateForm({ visible, onClose, validateResponse, setValidateResp
               placeholder="00-0000"
               value={agentValidate.agentPassword}
               onChange={(e) => {
-                setAgentValidate({ ...agentValidate, agentPassword: e.target.value });
-                setIsEmptyPassword(false); 
+                setAgentValidate({
+                  ...agentValidate,
+                  agentPassword: e.target.value,
+                });
+                setIsEmptyPassword(false);
               }}
             />
-            {isEmptyPassword && <p className="text-red-600">Password is required</p>}
+            {isEmptyPassword && (
+              <p className="text-red-600">Password is required</p>
+            )}
           </div>
           <button
             className="w-1/4 text-white bg-blue-800 text-center rounded py-2 mt-4"

@@ -5,7 +5,7 @@ import axios from "axios";
 import { Context } from "../../App";
 
 function CheckInformation() {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
   // const location = useLocation();
   // console.log(props, "props");
   // console.log(location, "useLocation Hook");
@@ -34,7 +34,7 @@ function CheckInformation() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-console.log(inboundInfo);
+    console.log(inboundInfo);
     const sentDataUrl = "http://localhost:8080/inbounds";
     axios
       .post(sentDataUrl, {
@@ -53,7 +53,7 @@ console.log(inboundInfo);
         passportNumber: inboundInfo.passportNo,
         i_passport_issue_date: inboundInfo.passportIssuedDate,
         isChild: inboundInfo.isChild,
-        licenseNo:inboundInfo.agentLicense,
+        licenseNo: inboundInfo.agentLicense,
         ch_name: inboundInfo.childName,
         ch_dob: inboundInfo.childDob,
         ch_gender: inboundInfo.childGender,
@@ -69,11 +69,12 @@ console.log(inboundInfo);
         r_country_b: inboundInfo.bPressidentCountry,
         passportCountry: inboundInfo.passportIssuedCountry,
         pre_rate: inboundInfo.premiumRate,
-        age: inboundInfo.age
+        age: inboundInfo.age,
       })
       .then((response) => {
-        console.log(response)
-        Navigate("/success")})
+        console.log(response);
+        Navigate("/success");
+      })
       .catch((err) => console.log(err));
   };
 
@@ -105,7 +106,9 @@ console.log(inboundInfo);
                 Total Amount (Including Service Charges)
               </p>
               <p>
-                {inboundInfo.premiumRate + inboundInfo.premiumRate * 0.0364} USD
+                {(inboundInfo.premiumRate +
+                  inboundInfo.premiumRate * 0.0364).toFixed(2)}{" "}
+                USD
               </p>
             </div>
             <div className="grid sm:text-[12px] grid-cols-2 p-3 bg-yellow-400  items-center mb-0.5">
@@ -113,7 +116,9 @@ console.log(inboundInfo);
                 Net Amount (Including Service Charges)
               </p>
               <p>
-                {inboundInfo.premiumRate + inboundInfo.premiumRate * 0.0364} USD
+                {(inboundInfo.premiumRate +
+                  inboundInfo.premiumRate * 0.0364).toFixed(2)}
+                USD
               </p>
             </div>
             <h3 className="pt-7 pb-3 font-medium underline underline-offset-1 text-blue-800">
@@ -168,6 +173,37 @@ console.log(inboundInfo);
               <p>{inboundInfo.arrivalDate}</p>
             </div>
             <hr className="bg-gray-300 h-[1.5px]" />
+
+            {inboundInfo.isChild === true && (
+              <>
+                <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+                  <p className="font-medium  w-40%">Child Name</p>
+                  <p>{inboundInfo.childName}</p>
+                </div>
+                <hr className="bg-gray-300 h-[1.5px]" />
+                <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+                  <p className="font-medium  w-40%">Date of Birth (Child)</p>
+                  <p>{inboundInfo.childDob}</p>
+                </div>
+                <hr className="bg-gray-300 h-[1.5px]" />
+                <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+                  <p className="font-medium  w-40%">Gender (Child)</p>
+                  <p>{inboundInfo.childGender}</p>
+                </div>
+                <hr className="bg-gray-300 h-[1.5px]" />
+                <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+                  <p className="font-medium  w-40%">Guardinance Name (Child)</p>
+                  <p>{inboundInfo.guardianceName}</p>
+                </div>
+                <hr className="bg-gray-300 h-[1.5px]" />
+                <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
+                  <p className="font-medium  w-40%">Relationship (Child)</p>
+                  <p>{inboundInfo.cRelationship}</p>
+                </div>
+                <hr className="bg-gray-300 h-[1.5px]" />
+              </>
+            )}
+
             <div className="grid sm:text-[12px] grid-cols-2 p-3 items-center mb-0.5">
               <p className="font-medium  w-40%">Journey From</p>
               <p>{inboundInfo ? inboundInfo.journeyFrom : ""}</p>

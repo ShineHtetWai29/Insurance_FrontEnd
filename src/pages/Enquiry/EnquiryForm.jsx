@@ -4,10 +4,8 @@ import { Context } from "../../App";
 import { da } from "date-fns/locale";
 import PDFFile from "../../PDFFile/PDFFile";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { v4 as uuidv4 } from "uuid";
 
 function EnquiryForm() {
-  const randomId = uuidv4();
   const [countryInfo, setCountryInfo] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [showTable, setShowTable] = useState(false);
@@ -159,7 +157,7 @@ function EnquiryForm() {
                   <tbody key={data.in_proposal_id}>
                     <tr className="bg-white border-b ">
                       <td className="px-6 py-4">{index + 1}</td>
-                      <td className="px-6 py-4">{randomId}</td>
+                      <td className="px-6 py-4">{35467576+index}</td>
                       {data.insuredPerson.isChild ? (
                         <td className="px-6 py-4">{data.ch_name}</td>
                       ) : (

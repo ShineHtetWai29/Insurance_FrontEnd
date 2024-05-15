@@ -24,9 +24,9 @@ function App() {
     arrivalDate: "",
     journeyFrom: "",
     journeyTo: "Myanmar",
-    coveragePlan:null ,
+    coveragePlan: null,
     iPPhone: "",
-    iPCode:"",
+    iPCode: "",
     iPEmail: "",
     iPAddress: "",
     iPresidentAddress: "",
@@ -43,8 +43,8 @@ function App() {
     NRC: "",
     relationship: "",
     bPPhone: "",
-    bPCode:"",
-    bPNumber:"",
+    bPCode: "",
+    bPNumber: "",
     bPEmail: "",
     bPresidentAddress: "",
     bPressidentCountry: "",
@@ -62,31 +62,28 @@ function App() {
     agentName: "",
 
     // PREMIUM ATTRIBUTE
-    age:"",
+    age: "",
     premiumRate: "",
-    paymentMethod: "visa"
+    paymentMethod: "visa",
   });
-  
-  return  (
+
+  return (
     <div>
       <Context.Provider value={[inboundInfo, setInboundInfo]}>
-      <BrowserRouter>
-        <Header />
+        <BrowserRouter>
+          <Header />
 
-
-        <Routes>
-          <Route path="" element={<DataInputForm/>}/>
-          <Route path="/success" element={<SuccessPage/>}/>
-          <Route path="/enquiry" element={<EnquiryForm/>}/>
-          <Route path="/datepicker" element={<MyDatePicker/>}/>
-          <Route path="/payment" element={<PaymentMethod/>}/>
-          <Route path="/checkinformation" element={<CheckInformation/>}/>
-        </Routes>
-        <Footer />
- 
-      </BrowserRouter>
+          <Routes>
+            <Route path="" element={<DataInputForm />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/enquiry" element={<EnquiryForm />} />
+            <Route path="/datepicker" element={<MyDatePicker />} />
+            <Route path="/payment" element={<PaymentMethod />} />
+            <Route path="/checkinformation" element={<CheckInformation />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
       </Context.Provider>
-      
     </div>
   );
 }

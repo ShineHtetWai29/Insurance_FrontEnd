@@ -6,15 +6,34 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import PaymentMethod from "../PaymentMethod/PaymentMethod";
 import { Context } from "../../App";
-import {format} from "date-fns"
+import { format } from "date-fns";
 const DataInputForm = () => {
   const [countryInfo, setCountryInfo] = useState([]);
   // const errors = [{}];
   const [validateResponse, setValidateResponse] = useState({
-    agentId:"",
+    agentId: "",
     agentLicense: "",
     agentName: "",
   });
+
+  // const [inboundInfo, setInboundInfo] = useState({ iPEmail: '', childDob: null });
+  const [emailError, setEmailError] = useState();
+
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    setInboundInfo({
+      ...inboundInfo,
+      iPEmail: email,
+    });
+
+    // Simple email regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
 
   const [isIPName, setIsIPName] = useState(false);
   const [isIPDob, setIsIPDob] = useState(false);
@@ -41,43 +60,46 @@ const DataInputForm = () => {
   const [isChildGender, setIsChilsGender] = useState(false);
   const [isGuardianceName, setIsGuardianceName] = useState(false);
   const [isCRelationship, setIsCRelationship] = useState(false);
-  
+
   const [visibleModal, setVisibleModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showAgent, setShowAgent] = useState("showselfservice");
-  const [inboundInfo, setInboundInfo] = useContext(Context)
+  const [inboundInfo, setInboundInfo] = useContext(Context);
 
   const handleChange = (Date) => {
-    setInboundInfo({ ...inboundInfo, passportIssuedDate: format(Date, "yyyy-MM-dd" ) });
+    setInboundInfo({
+      ...inboundInfo,
+      passportIssuedDate: format(Date, "yyyy-MM-dd"),
+    });
   };
   const handleDobChange = (Date) => {
-    setInboundInfo({ ...inboundInfo, iPDob: format(Date, "yyyy-MM-dd" ) });
+    setInboundInfo({ ...inboundInfo, iPDob: format(Date, "yyyy-MM-dd") });
   };
   const handleArrivalChange = (Date) => {
-    setInboundInfo({ ...inboundInfo, arrivalDate: format(Date, "yyyy-MM-dd" ) });
+    setInboundInfo({ ...inboundInfo, arrivalDate: format(Date, "yyyy-MM-dd") });
   };
   const handleBeneficiaryDobChange = (Date) => {
-    setInboundInfo({ ...inboundInfo, bPDob: format(Date, "yyyy-MM-dd" ) });
+    setInboundInfo({ ...inboundInfo, bPDob: format(Date, "yyyy-MM-dd") });
   };
   const handlechildDobChange = (Date) => {
-    setInboundInfo({ ...inboundInfo, childDob: format(Date, "yyyy-MM-dd" ) });
+    setInboundInfo({ ...inboundInfo, childDob: format(Date, "yyyy-MM-dd") });
   };
 
   useEffect(() => {
     const countryUrl = "http://localhost:8080/country";
     axios
       .get(countryUrl)
-      
+
       .then((response) => {
-        
-        response.data.data.sort((a, b) => a.country_name.localeCompare(b.country_name));
+        response.data.data.sort((a, b) =>
+          a.country_name.localeCompare(b.country_name)
+        );
         setCountryInfo(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -97,29 +119,17 @@ const DataInputForm = () => {
     setIsBPDob(inboundInfo.bPDob === "");
     setIsRelationship(inboundInfo.relationship === "");
     setIsBPPhone(inboundInfo.bPPhone === "");
-    setIsbResidentAddress(inboundInfo.bPesidentAddress === "");
-    setIsbResidentCountry(inboundInfo.bPesidentCountry === "");
+    setIsbResidentAddress(inboundInfo.bPresidentAddress === "");
+    setIsbResidentCountry(inboundInfo.bPressidentCountry === "");
     setIsChildName(inboundInfo.childName === "");
     setIsChilDob(inboundInfo.childDob === "");
     setIsChilsGender(inboundInfo.childGender === "");
     setIsGuardianceName(inboundInfo.guardianceName === "");
     setIsCRelationship(inboundInfo.cRelationship === "");
 
-    
-
-    const premiumUrl = "http://localhost:8080/premium"
+    const premiumUrl = "http://localhost:8080/premium";
     console.log(inboundInfo);
 
-    axios
-    .post(premiumUrl, {isChild: inboundInfo.isChild, co_plan: inboundInfo.coveragePlan, ch_dob: inboundInfo.childDob, i_dob: inboundInfo.iPDob})
-    .then((response) => {
-      console.log(response.data);
-      // setInboundInfo({...inboundInfo, })
-      setInboundInfo({...inboundInfo, premiumRate: response.data.premium ,age: response.data.age})
-      setVisibleModal(true)
-    } )
-   
-    
     if (
       inboundInfo.iPName === "" ||
       inboundInfo.iPDob === "" ||
@@ -137,19 +147,56 @@ const DataInputForm = () => {
       inboundInfo.bPDob === "" ||
       inboundInfo.relationship === "" ||
       inboundInfo.bPPhone === "" ||
-      inboundInfo.bPesidentAddress === "" ||
-      inboundInfo.bPesidentCountry === "" ||
-      inboundInfo.childName === "" ||
-      inboundInfo.childDob === "" ||
-      inboundInfo.childGender === "" ||
-      inboundInfo.guardianceName === "" ||
-      inboundInfo.cRelationship === ""
+      inboundInfo.bPresidentAddress === "" ||
+      inboundInfo.bPressidentCountry === ""
     ) {
       return;
+    } else if (inboundInfo.isChild === false) {
+      axios
+        .post(premiumUrl, {
+          isChild: inboundInfo.isChild,
+          co_plan: inboundInfo.coveragePlan,
+          ch_dob: inboundInfo.childDob,
+          i_dob: inboundInfo.iPDob,
+        })
+        .then((response) => {
+          console.log(response.data);
+          // setInboundInfo({...inboundInfo, })
+          setInboundInfo({
+            ...inboundInfo,
+            premiumRate: response.data.premium,
+            age: response.data.age,
+          });
+          setVisibleModal(true);
+        });
+    } else if (inboundInfo.isChild === true) {
+      if (
+        inboundInfo.childName === "" ||
+        inboundInfo.childDob === "" ||
+        inboundInfo.childGender === "" ||
+        inboundInfo.guardianceName === "" ||
+        inboundInfo.cRelationship === ""
+      ) {
+        return;
+      }
+      axios
+        .post(premiumUrl, {
+          isChild: inboundInfo.isChild,
+          co_plan: inboundInfo.coveragePlan,
+          ch_dob: inboundInfo.childDob,
+          i_dob: inboundInfo.iPDob,
+        })
+        .then((response) => {
+          console.log(response.data);
+          // setInboundInfo({...inboundInfo, })
+          setInboundInfo({
+            ...inboundInfo,
+            premiumRate: response.data.premium,
+            age: response.data.age,
+          });
+          setVisibleModal(true);
+        });
     }
-    
-  
-
   };
 
   return (
@@ -159,7 +206,7 @@ const DataInputForm = () => {
           INBOUND TRAVEL ACCIDENT INSURANCE
         </h2>
         <div className="bg-white max-w-[1170px]  shadow-xl  mx-auto mobile:px-12 px-2 py-4 rounded-lg shadow-gray-400">
-          <form className="" >
+          <form className="">
             {/* PASSPORT INFORMATION */}
             <div className="py-[20px] border-b-[1px] border-gray-500 ">
               <h2 className="underline text-[18px]  font-bold text-blue-800">
@@ -370,7 +417,6 @@ const DataInputForm = () => {
                   <DatePicker
                     selected={inboundInfo.arrivalDate}
                     onChange={handleArrivalChange}
-                    
                     dateFormat="yyyy-MM-dd"
                     className="w-full p-2 text-gray border-[1px] border-gray-400 rounded "
                     minDate={new Date()}
@@ -438,11 +484,13 @@ const DataInputForm = () => {
                     onChange={(e) =>
                       setInboundInfo({
                         ...inboundInfo,
-                        coveragePlan: parseInt( e.target.value),
+                        coveragePlan: parseInt(e.target.value),
                       })
                     }
                   >
-                    <option className="text-gray" value="">SELECT ONE</option>
+                    <option className="text-gray" value="">
+                      SELECT ONE
+                    </option>
                     <option className="text-gray" value={15}>
                       15 DAYS
                     </option>
@@ -496,9 +544,10 @@ const DataInputForm = () => {
                     <select
                       type="text"
                       className="w-[100px] text-gray p-2 bg-none "
-                      onChange={(e) => 
+                      onChange={(e) =>
                         setInboundInfo({
-                          ...inboundInfo, iPCode:e.target.value
+                          ...inboundInfo,
+                          iPCode: e.target.value,
                         })
                       }
                     >
@@ -514,10 +563,14 @@ const DataInputForm = () => {
                     </select>
                     <input
                       type="number"
-                      
                       className="w-full px-2 "
                       placeholder="ENTER PHONE NUMBER"
-                      onChange={(e) => setInboundInfo({...inboundInfo, iPPhone: `${inboundInfo.iPCode} ${e.target.value}`})}
+                      onChange={(e) =>
+                        setInboundInfo({
+                          ...inboundInfo,
+                          iPPhone: `${inboundInfo.iPCode} ${e.target.value}`,
+                        })
+                      }
                     />
                   </div>
                   {isIPPhone && (
@@ -525,24 +578,24 @@ const DataInputForm = () => {
                   )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px] ">
                     Insured's Email
                   </label>
                   <input
                     type="email"
                     value={inboundInfo.iPEmail}
-                    className="w-full p-2 text-gray border-[1px] border-gray-400  focus:ring-blue-500 focus:border-blue-500  rounded "
-                    onChange={(e) =>
-                      setInboundInfo({
-                        ...inboundInfo,
-                        iPEmail: e.target.value,
-                      })
-                    }
+                    className={`w-full p-2 text-gray border-[1px]  focus:ring-blue-500 focus:border-blue-500  rounded ${
+                      emailError ? "border-red-500" : "border-gray-400"
+                    }`}
+                    onChange={handleEmailChange}
                     placeholder="Insured's Email Address"
                   />
+                  {emailError && (
+                    <p className="text-red-500 text-sm mt-2">Enter a valid Email Address</p>
+                  )}
                 </div>
                 <div className="">
-                  <label className="block font-bold text-blue-800 mobile:text-[16px]mb-[8px]">
+                  <label className="block font-bold text-blue-800 mobile:text-[16px] mb-[8px]">
                     Address in Myanmar (Max: 250 Char)
                   </label>
                   <textarea
@@ -595,12 +648,11 @@ const DataInputForm = () => {
                       })
                     }
                   >
-                    <option className="text-gray" value="">SELECT ONE</option>
+                    <option className="text-gray" value="">
+                      SELECT ONE
+                    </option>
                     {countryInfo.map((result) => (
-                      <option
-                        key={result.country_id}
-                        value={result.country_id}
-                      >
+                      <option key={result.country_id} value={result.country_id}>
                         {result.country_name}
                       </option>
                     ))}
@@ -613,7 +665,7 @@ const DataInputForm = () => {
             </div>
 
             {/* CHILD INFORMATION */}
-            {inboundInfo.isChild  && (
+            {inboundInfo.isChild && (
               <div className="bg-[#eee] py-6 px-4 mb-4">
                 <h2 className="underline text-[18px] font-bold text-blue-800">
                   CHILD INFORMATION(CHILD IS NOT HOLDING A VALID PASSPORT)
@@ -649,8 +701,8 @@ const DataInputForm = () => {
                       selected={inboundInfo.childDob}
                       onChange={handlechildDobChange}
                       dateFormat="yyyy-MM-dd"
-                      className="w-full p-2 text-gray border-[1px] border-gray-400 rounded "
-                      maxDate={new Date()}
+                      className="w-full p-2 text-gray border-[1px] border-gray-400 rounded"
+                      minDate={maxDate}
                       showMonthDropdown
                       showYearDropdown
                       dropdownMode="select"
@@ -808,7 +860,10 @@ const DataInputForm = () => {
                     className="w-full p-2 text-gray border-[1px] border-gray-400 rounded "
                     placeholder="ENTER RELATIONSHIP"
                     onChange={(e) =>
-                     setInboundInfo({...inboundInfo, relationship:e.target.value})
+                      setInboundInfo({
+                        ...inboundInfo,
+                        relationship: e.target.value,
+                      })
                     }
                   />
                   {isRelationship && (
@@ -824,9 +879,13 @@ const DataInputForm = () => {
                   <div className="flex w-full test-[15px] border-[1px] border-gray-400 rounded ">
                     <select
                       type="text"
-                      
                       className="w-[100px] text-gray p-2 bg-none "
-                      onChange={(e) => setInboundInfo({...inboundInfo, bPCode:e.target.value})}
+                      onChange={(e) =>
+                        setInboundInfo({
+                          ...inboundInfo,
+                          bPCode: e.target.value,
+                        })
+                      }
                     >
                       <option className="text-gray">(+93) A</option>
                       {countryInfo.map((result) => (
@@ -843,9 +902,12 @@ const DataInputForm = () => {
                       type="number"
                       className="w-full p-2 "
                       placeholder="ENTER PHONE NUMBER"
-                      onChange={(e) => setInboundInfo({
-                        ...inboundInfo, bPPhone: `${inboundInfo.bPCode} ${e.target.value}`
-                      })}
+                      onChange={(e) =>
+                        setInboundInfo({
+                          ...inboundInfo,
+                          bPPhone: `${inboundInfo.bPCode} ${e.target.value}`,
+                        })
+                      }
                     />
                   </div>
                   {isBPPhone && (
@@ -864,7 +926,10 @@ const DataInputForm = () => {
                     className="w-full p-2 text-gray border-[1px] border-gray-400  focus:ring-blue-500 focus:border-blue-500  rounded"
                     placeholder="ENTER EMAIL"
                     onChange={(e) =>
-                      setInboundInfo({ ...inboundInfo, bPEmail: e.target.value })
+                      setInboundInfo({
+                        ...inboundInfo,
+                        bPEmail: e.target.value,
+                      })
                     }
                   />
                 </div>
@@ -887,9 +952,7 @@ const DataInputForm = () => {
                     }
                   />
                   {isBResidentAddress && (
-                    <p className="text-red-700">
-                      Resident Address is required
-                    </p>
+                    <p className="text-red-700">Resident Address is required</p>
                   )}
                 </div>
                 <div className="">
@@ -920,9 +983,7 @@ const DataInputForm = () => {
                     ))}
                   </select>
                   {isBResidentCountry && (
-                    <p className="text-red-700">
-                      Resident Country is required
-                    </p>
+                    <p className="text-red-700">Resident Country is required</p>
                   )}
                 </div>
               </div>
@@ -1049,8 +1110,12 @@ const DataInputForm = () => {
         inboundInfo={inboundInfo}
       />
 
-      <PaymentMethod  inboundData={inboundInfo} setInboundData={setInboundInfo} onClose={() => setVisibleModal(false)} show={visibleModal}/>
-
+      <PaymentMethod
+        inboundData={inboundInfo}
+        setInboundData={setInboundInfo}
+        onClose={() => setVisibleModal(false)}
+        show={visibleModal}
+      />
     </>
   );
 };

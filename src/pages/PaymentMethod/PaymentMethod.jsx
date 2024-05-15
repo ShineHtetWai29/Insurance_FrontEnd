@@ -3,7 +3,7 @@ import { GiCancel } from "react-icons/gi";
 import Images from "../../Images/Images";
 import { Link } from "react-router-dom";
 
-function PaymentMethod({inboundData,setInboundData,onClose, show}) {
+function PaymentMethod({ inboundData, setInboundData, onClose, show }) {
   // console.log(inboundData);
   // const [childSelection, setChildSelection] = useState("")
   // setChildSelection(inboundData.isChild)
@@ -14,9 +14,12 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
       className="fixed  inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center"
     >
       <form className="max-w-[800px] bg-white rounded p-4">
-        <div className="flex justify-between " onClick={()=> { 
-          onClose(false)
-          } }>
+        <div
+          className="flex justify-between "
+          onClick={() => {
+            onClose(false);
+          }}
+        >
           <h2 className="text-blue-800 text-[24px] font-bold underline">
             PREMIUM INFORMATION AND CHOOSE PAYMENT METHOD
           </h2>
@@ -28,28 +31,40 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Insured For</td>
               <td className="px-4 py-1 text-[#333] font-bold">
-              {inboundData.isChild ? "Buy For Child" : "Buy For This Passport Holder"}
+                {inboundData.isChild
+                  ? "Buy For Child"
+                  : "Buy For This Passport Holder"}
               </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Premium Amount</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.premiumRate} USD</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.premiumRate} USD
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Net Premium</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.premiumRate} USD</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.premiumRate} USD
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Age (Year)</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.age}</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.age}
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Coverage Plan</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.coveragePlan} Days</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.coveragePlan} Days
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Passport Number</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.passportNo}</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.passportNo}
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">
@@ -57,12 +72,15 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
                 <br />
                 (as per passport)
               </td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.iPName}</td>
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.iPName}
+              </td>
             </tr>
             <tr className="grid grid-cols-2 bg-[#0000004d] mb-1">
               <td className="px-4 py-1 text-[#333]">Estimated Arrival Date</td>
-              <td className="px-4 py-1 text-[#333] font-bold">{inboundData.arrivalDate}</td>
-
+              <td className="px-4 py-1 text-[#333] font-bold">
+                {inboundData.arrivalDate}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -80,7 +98,10 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
               id="visa"
               hidden
               onChange={(e) => {
-                setInboundData({...inboundData, paymentMethod: e.target.value})
+                setInboundData({
+                  ...inboundData,
+                  paymentMethod: e.target.value,
+                });
               }}
             />
             <label htmlFor="visa" className="relative">
@@ -104,7 +125,10 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
               hidden
               checked={inboundData.paymentMethod === "master"}
               onChange={(e) => {
-                setInboundData({...inboundData, paymentMethod: e.target.value})
+                setInboundData({
+                  ...inboundData,
+                  paymentMethod: e.target.value,
+                });
               }}
             />
             <label htmlFor="master" className="relative">
@@ -121,7 +145,9 @@ function PaymentMethod({inboundData,setInboundData,onClose, show}) {
             </label>
           </div>
         </div>
-        <Link to={"/checkinformation"}  className="text-white hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 text-[20px] font-bold bg-blue-800 text-center py-1 px-6 rounded "
+        <Link
+          to={"/checkinformation"}
+          className="text-white hover:bg-white hover:text-blue-700 hover:border-blue-700 hover:border-2 text-[20px] font-bold bg-blue-800 text-center py-1 px-6 rounded "
         >
           NEXT
         </Link>

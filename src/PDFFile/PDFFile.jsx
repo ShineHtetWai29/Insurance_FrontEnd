@@ -1,8 +1,6 @@
 import { Page, Text, Image, Document, StyleSheet, View } from '@react-pdf/renderer'
 import React from 'react'
 import Images from '../Images/Images'
-import { v4 as uuidv4 } from 'uuid'; 
-
 const styles = StyleSheet.create({
   whole: {
     margin: '25px 25px 0 25px',
@@ -136,7 +134,13 @@ const styles = StyleSheet.create({
 })
 const PDFFile = ({data}) => {
   const currentDate = new Date().toLocaleDateString()
-  const randomId = uuidv4();
+  const generateRandomId = () =>{
+    const prefix = "ITA";
+    const number1 = Math.floor(Math.random() * 9000) + 1000;  // Four-digit random number
+    const number2 = Math.floor(Math.random() * 900) + 1000000;    // Three-digit random number
+    return `${prefix}/${number1}/${number2}`;
+  }
+  const randomId = generateRandomId()
   return (
    <Document>
     <Page>

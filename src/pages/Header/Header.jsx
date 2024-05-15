@@ -9,13 +9,20 @@ export const Header = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const handleLogoClick = (event) => {
+    if (location.pathname === "/") {
+      event.preventDefault();
+      window.location.reload();
+    }
+  }
+
   return (
     <>
       <section className="max-w-[1170px] z-[100]  relative mx-auto">
         <div className="flex items-center justify-between my-4">
           <div className="flex gap-2">
-            <Link to="/">
-            <img className="w-[70px] sm:w-[50px]" src={Images.logo} alt="" />
+            <Link to="/" onClick={handleLogoClick}>
+              <img className="w-[70px] sm:w-[50px]" src={Images.logo} alt="" />
             </Link>
             <div className="flex flex-col">
               <h1 className="font-bold text-[25px]">Myanma Insurance</h1>
