@@ -20,6 +20,10 @@ const DataInputForm = () => {
   const [emailError, setEmailError] = useState();
   const [emailbPError, setbPEmailError] = useState();
 
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
+
   const handleInsuredEmailChange = (e) => {
     const email = e.target.value;
     setInboundInfo({
