@@ -723,6 +723,7 @@ const DataInputForm = () => {
                       dateFormat="yyyy-MM-dd"
                       className="w-full p-2 text-gray border-[1px] border-gray-400 rounded"
                       minDate={maxDate}
+                      maxDate={new Date()}
                       showMonthDropdown
                       showYearDropdown
                       dropdownMode="select"

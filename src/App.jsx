@@ -74,7 +74,7 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="" element={<DataInputForm />} />
+            <Route path="/" element={<DataInputForm />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/enquiry" element={<EnquiryForm />} />
             <Route path="/datepicker" element={<MyDatePicker />} />

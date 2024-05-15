@@ -1,27 +1,88 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Images from "../../Images/Images";
+import { Context } from "../../App";
 
 export const Header = () => {
+  const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [inboundInfo, setInboundInfo] = useContext(Context);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const handleLogoClick = (event) => {
-    if (location.pathname === "/") {
-      event.preventDefault();
-      window.location.reload();
-    }
-  }
+  // const handleLogoClick = (event) => {
+  //   if (location.pathname === "/") {
+  //     event.preventDefault();
+  //     // window.location.href("/")
+  //     setInboundInfo({...inboundInfo,
+  //       // INSURED PERSON ATTRIBUTE
+  //       iPName: "",
+  //       iPDob: "",
+  //       iPGender: "",
+  //       arrivalDate: "",
+  //       journeyFrom: "",
+  //       journeyTo: "Myanmar",
+  //       coveragePlan: null,
+  //       iPPhone: "",
+  //       iPCode: "",
+  //       iPEmail: "",
+  //       iPAddress: "",
+  //       iPresidentAddress: "",
+  //       iPresidentCountry: "",
+
+  //       // PASSPORT ATTRIBUTE
+  //       passportNo: "",
+  //       passportIssuedDate: "",
+  //       passportIssuedCountry: "",
+
+  //       // BENEFICIARY ATTRIBUTE
+  //       bPName: "",
+  //       bPDob: "",
+  //       NRC: "",
+  //       relationship: "",
+  //       bPPhone: "",
+  //       bPCode: "",
+  //       bPNumber: "",
+  //       bPEmail: "",
+  //       bPresidentAddress: "",
+  //       bPressidentCountry: "",
+
+  //       // CHILD ATTRIBUTE
+  //       childName: "",
+  //       childDob: "",
+  //       childGender: "",
+  //       guardianceName: "",
+  //       cRelationship: "",
+  //       isChild: false,
+
+  //       // AGENT ATTRIBUTE
+  //       agentLicense: "",
+  //       agentName: "",
+
+  //       // PREMIUM ATTRIBUTE
+  //       age: "",
+  //       premiumRate: "",
+  //       paymentMethod: "visa",
+  //     });
+  //     console.log(inboundInfo);
+
+  //   }
+  // }
 
   return (
     <>
       <section className="max-w-[1170px] z-[100]  relative mx-auto">
         <div className="flex items-center justify-between my-4">
           <div className="flex gap-2">
-            <Link to="/" onClick={handleLogoClick}>
+            <Link
+              
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/";
+              }}
+            >
               <img className="w-[70px] sm:w-[50px]" src={Images.logo} alt="" />
             </Link>
             <div className="flex flex-col">
